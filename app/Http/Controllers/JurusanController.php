@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jurusan;
 use App\Fakultas;
 
-class FakultasController extends Controller
+class JurusanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +17,14 @@ class FakultasController extends Controller
     {
         //pagination
         // numbering
-        $data = Fakultas::when($request->search, function($query) use($request){
-            $query->where('name', 'LIKE', '%'.$request->search);
+        $data2 = Fakultas::all();
+        $data = Jurusan::when($request->search, function($query) use($request){
+            $query->join('fakultas', 'jurusan.fakultas_id', '=', 'fakultas.id')
+                  ->where('fakultas.name', 'LIKE', '%'.$request->search)
+                  ->select('jurusan.*', 'fakultas.name');
         })->paginate(5);
 
-        return view('fakultas.index', compact('data'));
+        return view('jurusan.index', compact('data','data2'));
     }
 
     /**
@@ -30,7 +34,8 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        return view('fakultas.create');
+        $fakultas = Fakultas::all();
+        return view('jurusan.create',compact('fakultas'));
     }
 
     /**
@@ -41,9 +46,9 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        Fakultas::create(['name' => $request->name]);
+        Jurusan::create(['nama_jurusan' => $request->name]);
 
-        return redirect()->route('fakultas.index');
+        return redirect()->route('jurusan.index');
     }
 
     /**
@@ -65,8 +70,9 @@ class FakultasController extends Controller
      */
     public function edit($id)
     {
-        $data = Fakultas::find($id);
-            return view('fakultas.edit', compact('data'));
+        $data2 = Fakultas::all();
+        $jurusan = Jurusan::find($id);
+            return view('jurusan.edit', compact('jurusan','data2'));
     }
 
     /**
@@ -78,8 +84,8 @@ class FakultasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Fakultas::whereId($id)->update(['name'=>$request->name]);
-         return redirect()->route('fakultas.index');
+        Jurusan::whereId($id)->update(['nama_jurusan'=>$request->name]);
+         return redirect()->route('jurusan.index');
     }
 
     /**
@@ -90,7 +96,7 @@ class FakultasController extends Controller
      */
     public function destroy($id)
     {
-        Fakultas::whereId($id)->delete();
-            return redirect()->route('fakultas.index');
+         Jurusan::whereId($id)->delete();
+            return redirect()->route('jurusan.index');
     }
 }

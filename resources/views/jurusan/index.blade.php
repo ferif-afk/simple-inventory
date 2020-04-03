@@ -19,12 +19,12 @@
                 <button type="submit" class="btn btn-primary">Search</button>
               </div>
             </form>
-            <a href="{{ route('fakultas.index') }}" class="pull-right">
+            <a href="{{ route('jurusan.index') }}" class="pull-right">
               <button type="button" class="btn btn-info">All Data</button>
             </a>
           </div>
           <div class="card-header">
-            <a href="{{ route('fakultas.create') }}">
+            <a href="{{ route('jurusan.create') }}">
               <button type="button" class="btn btn-primary">Add New</button>
             </a>
           </div>
@@ -33,21 +33,29 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name</th>
+                  <th scope="col">Fakultas</th>
+                  <th scope="col">Jurusan</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-               @forelse($data as $fakultas =>$hasil)
+               @forelse($data as $jurusan =>$hasil)
                 <tr>
-                  <td>{{$data->firstItem() +$fakultas}}</td>
-                  <td>{{ $hasil->name }}</td>
+                  <td>{{$data->firstItem() +$jurusan}}</td>
                   <td>
-                    <a href="{{ route('fakultas.edit', ['id' => $hasil->id]) }}">
+              @foreach($data2 as $fakultas)
+                      @if($fakultas->id == $hasil->fakultas_id)
+                      {{ $fakultas->name }}
+                      @endif
+              @endforeach
+                  </td>
+                  <td>{{ $hasil->nama_jurusan }}</td>
+                  <td>
+                    <a href="{{ route('jurusan.edit', ['id' => $hasil->id]) }}">
                       <button type="button" class="btn btn-sm btn-info">Edit</button>
                     </a>
 
-                    <a href="{{ route('fakultas.delete', ['id' => $hasil->id]) }}"
+                    <a href="{{ route('jurusan.delete', ['id' => $hasil->id]) }}"
                       onclick="return confirm('Delete data?');" 
                       >
                       <button type="button" class="btn btn-sm btn-danger">Hapus</button>
