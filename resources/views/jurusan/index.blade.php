@@ -4,7 +4,7 @@
 <section class="section">
   
   <div class="section-header">
-    <h1>Fakultas</h1>
+    <h1>Jurusan</h1>
   </div>
 
   <div class="section-body">
@@ -43,9 +43,9 @@
                 <tr>
                   <td>{{$data->firstItem() +$jurusan}}</td>
                   <td>
-              @foreach($data2 as $fakultas)
-                      @if($fakultas->id == $hasil->fakultas_id)
-                      {{ $fakultas->name }}
+              @foreach($data3 as $fs)
+                      @if($fs->id == $hasil->fakultas_id)
+                      {{ $fs->name }}
                       @endif
               @endforeach
                   </td>

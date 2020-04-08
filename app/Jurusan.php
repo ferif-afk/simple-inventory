@@ -10,4 +10,9 @@ class Jurusan extends Model
 
     protected $fillable = ['nama_jurusan','fakultas_id'];
 
+     public function fakultas()
+    {
+    	return $this->belongsTo('App\Fakultas', 'id_fakultas');
+    }
+
 }

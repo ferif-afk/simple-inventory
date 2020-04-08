@@ -11,29 +11,29 @@
     <div class="col-12 col-md-6 col-lg-6">
         <div class="card">
           <div class="card-header">
-            <a href="{{ route('jurusan.index') }}"> 
+            <a href="{{ url('ruangan') }}"> 
               <button type="button" class="btn btn-outline-info">
                 <i class="fas fa-arrow-circle-left"></i> Back
               </button>
           </a>
           </div>
           <div class="card-body">
-            <form action="{{ route('jurusan.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('ruangan/add') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
-                <label>Nama Fakultas</label>
-                <select name="fakultas_id" class="form-control" required="">
-                  @foreach($fakultas as $data)
-                  <option value="{{$data->id}}">{{$data->name}}</option>
-                  @endforeach
+                <label>Nama Jurusan</label>
+                <select name="id_jurusan" class="form-control">
+                    @foreach($jurusan as $j)
+                      <option value="{{ $j->id }}">{{ $j->nama_jurusan }}</option>
+                    @endforeach
                 </select>
               </div>
               <div class="form-group">
-                <label>Jurusan</label>
-                <input type="text" name="name" class="form-control">
+                <label>Nama Ruangan</label>
+                <input type="text" name="nama_ruangan" class="form-control">
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary">SAVE</button>
+                <button type="submit" class="btn btn-primary">SIMPAN</button>
               </div>
               </form>
           </div>

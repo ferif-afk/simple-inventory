@@ -17,14 +17,14 @@ class JurusanController extends Controller
     {
         //pagination
         // numbering
-        $data2 = Fakultas::all();
+        $data3 = Fakultas::all();
         $data = Jurusan::when($request->search, function($query) use($request){
             $query->join('fakultas', 'jurusan.fakultas_id', '=', 'fakultas.id')
                   ->where('fakultas.name', 'LIKE', '%'.$request->search)
                   ->select('jurusan.*', 'fakultas.name');
         })->paginate(5);
 
-        return view('jurusan.index', compact('data','data2'));
+        return view('jurusan.index', compact('data','data3'));
     }
 
     /**
@@ -46,7 +46,10 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        Jurusan::create(['nama_jurusan' => $request->name]);
+        Jurusan::create([
+            'fakultas_id' => $request->fakultas_id,
+            'nama_jurusan' => $request->name
+        ]);
 
         return redirect()->route('jurusan.index');
     }
@@ -84,7 +87,10 @@ class JurusanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Jurusan::whereId($id)->update(['nama_jurusan'=>$request->name]);
+        Jurusan::whereId($id)->update([
+            'fakultas_id' => $request->fakultas_id,
+            'nama_jurusan' => $request->name
+        ]);
          return redirect()->route('jurusan.index');
     }
 
