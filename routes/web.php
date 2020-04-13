@@ -52,6 +52,10 @@ Route::post('/barang/add', 'BarangController@add');
 Route::get('/barang/{id}/delete','BarangController@delete');
 Route::get('/barang/{id}/edit', 'BarangController@edit');
 Route::post('/barang/{id}/update', 'BarangController@update');
+
+Route::get('/barang', 'BarangController@index');
+Route::get('/barang/export_excel', 'BarangController@export_excel');
+
 });
 
 Route::get('dashboard', function () {

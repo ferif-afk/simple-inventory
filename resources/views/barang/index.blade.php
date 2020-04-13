@@ -29,6 +29,9 @@
             <a href="{{url('/barang/tambahBarang')}}"> 
             <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Barang</button>
             </a>
+            <a href="{{url('/barang/export_excel')}}"> 
+            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Exel</button>
+            </a>
           </div>
           @endif
           <div class="card-body">
