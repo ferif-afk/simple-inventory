@@ -16,7 +16,7 @@ class CreateUsers extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->string('role',50)->default('admin');
             $table->timestamps();
