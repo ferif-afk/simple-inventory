@@ -2,6 +2,7 @@
 
 @section('content')
 <section class="section">
+   
   
   <div class="section-header">
     <h1>Barang <small>Add Data</small></h1>
@@ -18,6 +19,17 @@
           </a>
           </div>
           <div class="card-body">
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
             <form action="{{ url('barang/add') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
@@ -39,6 +51,10 @@
               <div class="form-group">
                 <label>Barang Rusak</label>
                 <input type="number" min="0" name="broken" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="photo">Upload Photo</label><br>
+                <input type="file" name="gambar" accept=".jpg, .png, .jpeg">
               </div>
               <input type="hidden" name="created_by" value="{{auth()->user()->id}}">
               <div class="form-group">

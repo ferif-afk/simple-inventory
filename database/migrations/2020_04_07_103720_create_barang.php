@@ -19,6 +19,7 @@ class CreateBarang extends Migration
             $table->string('nama_barang', 255);
             $table->integer('total');
             $table->integer('broken');
+            $table->string('gambar')->nullable();
             $table->bigInteger('created_by')->unsigned()->nullable();
             $table->bigInteger('updated_by')->unsigned()->nullable();
             $table->timestamps();

@@ -15,6 +15,7 @@ class BarangSeeder extends Seeder
         $listBarang = [ 'Meja','Papan Tulis','Remote AC'];
         $listTotal = [ '25','1','1' ];
         $listRusak = [ '2' ,'0','0' ];
+        $listGambar = [ 'Png' ,'Jpg','Awd' ];
         $isi = 0;
         $ruangan = 1;
 
@@ -24,6 +25,7 @@ class BarangSeeder extends Seeder
                 'nama_barang' => $barang,
                 'total' => $listTotal[$isi],
                 'broken' => $listRusak[$isi],
+                'gambar' => $barang,
                 'created_by' => 1,
                 'updated_by' => rand(1,2)
                 ]);

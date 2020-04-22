@@ -20,6 +20,17 @@
           </a>
           </div>
           <div class="card-body">
+
+             @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ url('/barang/'.$barang->id.'/update') }}" method="POST">
               @csrf
               <div class="form-group">
@@ -40,11 +51,16 @@
               </div>
               <div class="form-group">
                 <label>Barang Rusak</label>
-                <input type="number" min="0" name="broken" class="form-control" value="{{ $barang->broken }}">
+                <input type="number" min="0" name="broken" class="form-control" value="{{ $barang->broken }}"> 
+              </div>
+              <div class="form-group">
+                <label for="photo">Upload Photo</label><br>
+                <figcaption class="figure-caption">{{ $barang->gambar }}</figcaption><br>
+                <input type="file" name="gambar">
               </div>
                 <input type="hidden" name="created_by" value="{{ $barang->created_by }}">
                 <input type="hidden" name="updated_by" value="{{auth()->user()->id}}">
-              <div class="form-group">
+              <div class="form-group"> 
                 <button type="submit" class="btn btn-primary">SIMPAN</button>
               </div>
               </form>

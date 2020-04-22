@@ -56,8 +56,5 @@ Route::post('/barang/{id}/update', 'BarangController@update');
 Route::get('/barang', 'BarangController@index');
 Route::get('/barang/export_excel', 'BarangController@export_excel');
 
-});
+Route::get('/', 'DashboardController@index')->name('/');});
 
-Route::get('dashboard', function () {
-	return view('dashboard.index');
-})->name('dashboard');
