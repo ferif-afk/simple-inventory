@@ -16,6 +16,9 @@ Route::get('signout', ['as' => 'auth.signout', 'uses' => 'Auth\loginController@s
 Route::group(['middleware' => 'auth'], function(){
 Route::group(['middleware' => 'admin.only'], function(){
 
+//email
+Route::get('/kirimemail','EmailController@send');
+
 //fakultas
 Route::get('fakultas', ['as' => 'fakultas.index', 'uses' => 'FakultasController@index']);
 Route::get('fakultas/create', ['as' => 'fakultas.create', 'uses' => 'FakultasController@create']);
@@ -57,4 +60,5 @@ Route::get('/barang', 'BarangController@index');
 Route::get('/barang/export_excel', 'BarangController@export_excel');
 
 Route::get('/', 'DashboardController@index')->name('/');});
+
 
