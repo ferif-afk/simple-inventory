@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Fakultas;
 
+use App\Imports\FakultasImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
 class FakultasController extends Controller
 {
     /**
@@ -28,6 +32,24 @@ class FakultasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function import_excel(Request $request) {
+        $this->validate($request, [
+            'excel' => 'required'
+        ]);
+
+        $file = $request->file('excel');
+
+        $filename = rand(100, 999)."-fakultas.".$file->getClientOriginalExtension();
+
+        $file->move('excel',$filename);
+
+        Excel::import(new FakultasImport,public_path('/excel/fakultas/'.$filename));
+
+        return redirect()->route('fakultas.index');
+    }
+
+
     public function create()
     {
         return view('fakultas.create');

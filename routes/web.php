@@ -27,6 +27,7 @@ Route::post('fakultas', ['as' => 'fakultas.store', 'uses' => 'FakultasController
 Route::get('fakultas/edit/{id}', ['as' => 'fakultas.edit', 'uses' => 'FakultasController@edit']);
 Route::patch('fakultas/{id}', ['as' => 'fakultas.update', 'uses' => 'FakultasController@update']);
 Route::get('fakultas/{id}', ['as' => 'fakultas.delete', 'uses' => 'FakultasController@destroy']);
+Route::post('/fakultas/import_excel', 'FakultasController@import_excel');
 });
 
 //jurusan
@@ -56,6 +57,7 @@ Route::get('/barang/{id}/delete','BarangController@delete');
 Route::get('/barang/{id}/edit', 'BarangController@edit');
 Route::post('/barang/{id}/update', 'BarangController@update');
 
+//import
 Route::get('/barang', 'BarangController@index');
 Route::get('/barang/export_excel', 'BarangController@export_excel');
 
