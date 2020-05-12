@@ -17,7 +17,6 @@
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Search</button>
-              </div>
             </form>
             <a href="{{ route('fakultas.index') }}" class="pull-right">
               <button type="button" class="btn btn-info">All Data</button>
@@ -31,7 +30,7 @@
             </a>
           </div>
           <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-responsive">
               <thead>
                 <tr>
                   <th scope="col">#</th>

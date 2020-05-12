@@ -30,7 +30,7 @@
             </a>
           </div>
           <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-responsive">
               <thead>
                 <tr>
                   <th scope="col" width="100px"><center>#</center></th>

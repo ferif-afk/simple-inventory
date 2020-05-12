@@ -33,23 +33,6 @@ class FakultasController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function import_excel(Request $request) {
-        $this->validate($request, [
-            'excel' => 'required'
-        ]);
-
-        $file = $request->file('excel');
-
-        $filename = rand(100, 999)."-fakultas.".$file->getClientOriginalExtension();
-
-        $file->move('excel',$filename);
-
-        Excel::import(new FakultasImport,public_path('/excel/fakultas/'.$filename));
-
-        return redirect()->route('fakultas.index');
-    }
-
-
     public function create()
     {
         return view('fakultas.create');
@@ -115,4 +98,18 @@ class FakultasController extends Controller
         Fakultas::whereId($id)->delete();
             return redirect()->route('fakultas.index');
     }
+
+    public function import(Request $request){
+        $validateData = $request->validate([
+            'file' => 'required|mimes:xls,xlsx'
+        ]);
+
+        $file = $request->file('file');
+        $filename = date('dmYhis').'-'.$file->getClientOriginalName();
+        $file->move('uploads/Fakultas',$filename);
+        Excel::import(new FakultasImport, public_path('/uploads/Fakultas/'.$filename));
+
+        return redirect('/fakultas')->with('message', 'Data Fakultas Berhasil Di Import!');
+    }
+
 }
